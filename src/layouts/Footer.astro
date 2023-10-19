@@ -1,0 +1,24 @@
+---
+const today = new Date();
+---
+
+<footer class='footer'>
+    &copy; {today.getFullYear()} Hello Mentor.
+</footer>
+
+<style lang='scss'>
+    @use "/src/styles/global.scss" as g;
+
+    .footer {
+        font-size: 12px;
+        text-align: center;
+        display: block;
+        background-color: var(--color-black);
+        color: var(--color-white);
+        padding: 8px 0;
+        letter-spacing: 0.1em;
+        padding-left: 0.1em;
+        font-weight: bold;
+        position: relative;
+    }
+</style>

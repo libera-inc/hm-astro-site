@@ -1,0 +1,35 @@
+---
+export interface Props {
+    pubDate: Date;
+    updatedDate: Date | undefined;
+}
+
+const { pubDate, updatedDate } = Astro.props;
+---
+
+<div class='time'>
+    <time datetime={pubDate.toISOString()}>公開：{pubDate.toLocaleDateString("ja-JP")}</time>
+
+    {updatedDate && <time datetime={updatedDate.toISOString()}>更新：{updatedDate.toLocaleDateString("ja-JP")}</time>}
+</div>
+
+<style lang='scss'>
+    @use "/src/styles/global.scss" as g;
+
+    .time {
+        display: flex;
+        gap: 24px;
+
+        time {
+            display: block;
+            font-weight: bold;
+            opacity: 0.6;
+            font-size: 12px;
+            margin-bottom: 4px;
+
+            @include g.mq() {
+                font-size: 14px;
+            }
+        }
+    }
+</style>

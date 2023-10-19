@@ -1,0 +1,125 @@
+---
+import Layout from "@src/layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import Title from "@src/components/Title.astro";
+import Pagination from "@src/components/Pagination.astro";
+import PostDate from "@src/components/PostDate.astro";
+import type { GetStaticPathsOptions } from "astro";
+
+export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
+    const posts = (await getCollection("blog")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+    return paginate(posts, { pageSize: 8 });
+}
+
+const { page } = Astro.props;
+---
+
+<Layout title='BLOG' description='BLOGページです。'>
+    <Title emoji='📚'>BLOG</Title>
+
+    <div class='list'>
+        {
+            page.data.map((post) => (
+                <article class='article'>
+                    <a href={`/blog/${post.slug}/`} class='thumbnail'>
+                        <img width={720} height={360} src={post.data.thumbnail} alt='' class='thumbnail' />
+                    </a>
+
+                    <div class='info'>
+                        <PostDate pubDate={post.data.pubDate} updatedDate={post.data.updatedDate} />
+
+                        <h2>
+                            <a href={`/blog/${post.slug}/`} class='text-link'>
+                                {post.data.title}
+                            </a>
+                        </h2>
+                    </div>
+                </article>
+            ))
+        }
+    </div>
+
+    <div class='pagination'>
+        <Pagination prev={page.url.prev} next={page.url.next} />
+    </div>
+</Layout>
+
+<style lang='scss'>
+    @use "/src/styles/global.scss" as g;
+
+    .list {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 32px 24px;
+        margin-top: 40px;
+
+        @include g.mq() {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    .thumbnail {
+        display: block;
+        overflow: hidden;
+        border-radius: 12px;
+
+        &:focus-visible {
+            outline: none;
+            box-shadow:
+                0 0 0 1px var(--color-outline) inset,
+                0 0 0 4px var(--color-outline-inset);
+
+            img {
+                transform: scale(1.1);
+            }
+        }
+
+        @media (hover: hover) {
+            &:hover {
+                img {
+                    transform: scale(1.1);
+                }
+            }
+        }
+
+        img {
+            border-radius: 12px;
+            aspect-ratio: 2/1;
+            object-fit: cover;
+            transition: 0.3s;
+        }
+    }
+
+    .info {
+        margin-top: 8px;
+        padding: 0 6px;
+    }
+
+    .text-link {
+        font-weight: bold;
+        line-height: 1.6;
+        transition: 0.3s;
+        font-size: 18px;
+        display: inline-block;
+
+        @include g.mq() {
+            font-size: 20px;
+        }
+
+        &:focus-visible {
+            outline: none;
+            color: var(--color-link);
+            text-decoration: underline;
+        }
+
+        @media (hover: hover) {
+            &:hover {
+                color: var(--color-link);
+            }
+        }
+    }
+
+    .pagination {
+        margin-top: 40px;
+    }
+</style>

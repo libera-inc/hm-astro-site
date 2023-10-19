@@ -1,0 +1,84 @@
+---
+import { getCollection } from "astro:content";
+import type { GetStaticPathsOptions } from "astro";
+import Layout from "@src/layouts/Layout.astro";
+import Title from "@src/components/Title.astro";
+import Pagination from "@src/components/Pagination.astro";
+import PostDate from "@src/components/PostDate.astro";
+
+export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
+    const posts = (await getCollection("news")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+    return paginate(posts, { pageSize: 10 });
+}
+
+const { page } = Astro.props;
+---
+
+<Layout title='NEWS' description='NEWSページです。'>
+    <Title emoji='💡'>news</Title>
+
+    <div class='list'>
+        {
+            page.data.map((post) => (
+                <article class='article'>
+                    <PostDate pubDate={post.data.pubDate} updatedDate={post.data.updatedDate} />
+
+                    <h2>
+                        <a href={`/news/${post.slug}/`}>{post.data.title} </a>
+                    </h2>
+                </article>
+            ))
+        }
+    </div>
+
+    <div class='pagination'>
+        <Pagination prev={page.url.prev} next={page.url.next} />
+    </div>
+</Layout>
+
+<style lang='scss'>
+    @use "/src/styles/global.scss" as g;
+
+    .list {
+        display: flex;
+        flex-direction: column;
+        margin-top: 40px;
+    }
+
+    .article {
+        padding-bottom: 32px;
+        border-bottom: 2px dashed var(--color-border02);
+
+        &:not(:first-child) {
+            padding-top: 32px;
+        }
+
+        a {
+            font-weight: bold;
+            line-height: 1.6;
+            transition: 0.3s;
+            font-size: 18px;
+            display: inline-block;
+
+            @include g.mq() {
+                font-size: 20px;
+            }
+
+            &:focus-visible {
+                outline: none;
+                color: var(--color-link);
+                text-decoration: underline;
+            }
+
+            @media (hover: hover) {
+                &:hover {
+                    color: var(--color-link);
+                }
+            }
+        }
+    }
+
+    .pagination {
+        margin-top: 40px;
+    }
+</style>

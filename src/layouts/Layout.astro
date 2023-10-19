@@ -1,0 +1,23 @@
+---
+import Head from "@src/components/Head.astro";
+import Header from "@src/layouts/Header.astro";
+import Footer from "@src/layouts/Footer.astro";
+
+const { title, description, image, noindex } = Astro.props;
+---
+
+<html lang='ja'>
+    <Head title={title} description={description} image={image} noindex={noindex} />
+
+    <body>
+        <div class='l-wrap'>
+            <Header />
+            <main class='l-main'>
+                <div class='l-container'>
+                    <slot />
+                </div>
+            </main>
+            <Footer />
+        </div>
+    </body>
+</html>

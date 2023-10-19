@@ -1,0 +1,25 @@
+---
+import Layout from "@src/layouts/Layout.astro";
+import Title from "@src/components/Title.astro";
+---
+
+<Layout title='404 not found' description='404ページです。' noindex>
+    <Title emoji='☔️'>404 not found</Title>
+
+    <p class='text'>
+        <span>申し訳ございません。</span>
+        <span>お探しのページは削除されたか、URLが変更された可能性がございます。</span>
+    </p>
+</Layout>
+
+<style lang='scss'>
+    .text {
+        font-weight: bold;
+        line-height: 2;
+        margin-top: 40px;
+
+        span {
+            display: block;
+        }
+    }
+</style>

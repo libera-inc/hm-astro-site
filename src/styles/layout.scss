@@ -1,0 +1,23 @@
+@use "/src/styles/global.scss" as g;
+
+.l-wrap {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.l-main {
+    flex: 1;
+    overflow-x: hidden;
+}
+
+.l-container {
+    width: 92%;
+    max-width: var(--width-content);
+    margin: 0 auto;
+    padding: 64px 0;
+
+    @include g.mq() {
+        padding: 80px 0;
+    }
+}

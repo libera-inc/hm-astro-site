@@ -1,0 +1,131 @@
+---
+import Layout from "@src/layouts/Layout.astro";
+import Title from "@src/components/Title.astro";
+---
+
+<Layout title='CONTACT' description='CONTACTページです。'>
+    <Title emoji='📮'>contact</Title>
+
+    <form method='post' action='https://libera.form.newt.so/v1/ncX9erVxL' class='form' id='js-form'>
+        <div class='item'>
+            <p class='item-name'>お名前</p>
+            <input type='text' name='お名前' class='text' required='required' autofocus />
+        </div>
+
+        <div class='item'>
+            <p class='item-name'>メールアドレス</p>
+            <input type='email' name='メールアドレス' class='text' required='required' />
+        </div>
+
+        <div class='item'>
+            <p class='item-name'>お問い合わせ内容</p>
+            <textarea name='お問い合わせ内容' class='textarea' required='required'></textarea>
+        </div>
+
+        <div class='item'>
+            <button type='submit' class='button'>送信する</button>
+        </div>
+    </form>
+</Layout>
+
+<script>
+    window.onload = () => {
+        const form = document.getElementById("js-form");
+
+        if (!form) return;
+
+        form.onsubmit = () => window.confirm("送信してよろしいですか？");
+    };
+</script>
+
+<style lang='scss'>
+    .form {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        margin-top: 40px;
+    }
+
+    .item-name {
+        font-weight: bold;
+        margin-bottom: 6px;
+    }
+
+    .text {
+        height: 56px;
+        width: 100%;
+        padding: 8px 12px;
+        border-radius: 8px;
+        border: none;
+        box-shadow:
+            0 0 0 1px var(--color-gray) inset,
+            0 0 0 4px transparent inset;
+        background-color: var(--color-white);
+        appearance: none;
+        outline: 0;
+        font-weight: bold;
+
+        &::placeholder {
+            opacity: 0.6;
+            font-weight: bold;
+        }
+
+        &:focus {
+            box-shadow:
+                0 0 0 1px var(--color-outline) inset,
+                0 0 0 4px var(--color-outline-inset);
+        }
+    }
+
+    .textarea {
+        font-weight: bold;
+        display: block;
+        width: 100%;
+        height: 100%;
+        padding: 8px 12px;
+        border-radius: 8px;
+        border: none;
+        box-shadow:
+            0 0 0 1px var(--color-gray) inset,
+            0 0 0 4px transparent inset;
+        appearance: none;
+        resize: vertical;
+        outline: 0;
+        background-color: var(--color-white);
+        min-height: 200px;
+
+        &:focus {
+            box-shadow:
+                0 0 0 1px var(--color-outline) inset,
+                0 0 0 4px var(--color-outline-inset);
+        }
+    }
+
+    .button {
+        display: inline-block;
+        width: 160px;
+        height: 56px;
+        text-align: center;
+        font-weight: bold;
+        border-radius: 12px;
+        background-color: var(--color-link);
+        color: var(--color-white);
+        letter-spacing: 0.1em;
+        padding-left: 0.1em;
+        transition: 0.3s;
+
+        &:focus-visible {
+            background-color: var(--color-link-hover);
+            outline: none;
+            box-shadow:
+                0 0 0 1px var(--color-outline) inset,
+                0 0 0 4px var(--color-outline-inset);
+        }
+
+        @media (hover: hover) {
+            &:hover {
+                background-color: var(--color-link-hover);
+            }
+        }
+    }
+</style>

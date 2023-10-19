@@ -1,0 +1,51 @@
+---
+import "@src/styles/contents.scss";
+import { type CollectionEntry, getCollection } from "astro:content";
+import Layout from "@src/layouts/Layout.astro";
+import PostDate from "@src/components/PostDate.astro";
+
+export async function getStaticPaths() {
+    const posts = await getCollection("news");
+    return posts.map((post) => ({
+        params: { slug: post.slug },
+        props: post,
+    }));
+}
+type Props = CollectionEntry<"blog">;
+
+const post = Astro.props;
+const { Content } = await post.render();
+---
+
+<Layout title={post.data.title} description={post.data.description}>
+    <PostDate pubDate={post.data.pubDate} updatedDate={post.data.updatedDate} />
+
+    <h1 class='title'>{post.data.title}</h1>
+
+    <div class='contents'>
+        <Content />
+    </div>
+</Layout>
+
+<style lang='scss'>
+    @use "/src/styles/global.scss" as g;
+
+    .title {
+        font-weight: bold;
+        font-size: 20px;
+        letter-spacing: 0.05em;
+        line-height: 1.6;
+
+        @include g.mq() {
+            font-size: 26px;
+        }
+    }
+
+    .contents {
+        margin-top: 40px;
+    }
+</style>
+
+<script>
+    import "@src/scripts/link.js";
+</script>

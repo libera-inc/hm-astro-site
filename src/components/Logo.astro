@@ -1,0 +1,44 @@
+---
+import { SITE_TITLE } from "@src/consts.mjs";
+---
+
+<a href='/' class='logo'>
+    <span class='u-emoji logo-emoji'>👻</span>
+    <span class='logo-text'>{SITE_TITLE}</span>
+</a>
+
+<style lang='scss'>
+    @use "/src/styles/global.scss" as g;
+
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 4px 10px;
+        border-radius: 8px;
+        transition: 0.3s;
+
+        &:focus-visible {
+            outline: none;
+            background-color: var(--color-black-hover);
+        }
+    }
+
+    .logo-emoji {
+        font-size: 20px;
+
+        @include g.mq() {
+            font-size: 24px;
+        }
+    }
+
+    .logo-text {
+        color: var(--color-white);
+        font-weight: bold;
+        font-size: 18px;
+
+        @include g.mq() {
+            font-size: 20px;
+        }
+    }
+</style>

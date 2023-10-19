@@ -1,0 +1,40 @@
+---
+import Layout from "@src/layouts/Layout.astro";
+import Title from "@src/components/Title.astro";
+import { Picture } from "astro:assets";
+import aboutImage from "@src/images/about/about.png";
+---
+
+<Layout title='ABOUT' description='ABOUTページです。'>
+    <Title emoji='🤘'>about</Title>
+
+    <div class='img'>
+        <Picture src={aboutImage} formats={["avif", "webp"]} alt='...' loading='eager' />
+    </div>
+
+    <p class='text'>(ChatGPTが文章作成)人生とは、時に明るく、時に暗く、予測不可能な旅である。我々は生まれた瞬間から、終焉を迎えるその瞬間まで、時の流れの中で成長し、学び、そして変わる。この旅の中で経験する喜びや悲しみ、成功や失敗は、私たち一人一人に固有の物語を形成する。 それぞれの物語は、他の誰もが持っていない、独自の価値と意味を持つ。比較や評価の対象となることなく、私たちの人生は私たちだけのもの。そして、その人生を最も豊かにするのは、物や名誉、権力ではなく、真に意味のある関係や経験、そして自己の成長である。 過去の過ちや未来の不安に囚われず、現在の瞬間を全身全霊で生きること。それが、この一時的な存在の中で最も真の価値を見つける鍵である。私たちは常に、深く、情熱的に生きる機会を持っている。その選択は、私たち自身の手に委ねられている。</p>
+</Layout>
+
+<style lang='scss'>
+    @use "/src/styles/global.scss" as g;
+
+    .img {
+        margin-top: 40px;
+
+        img {
+            aspect-ratio: 2/1;
+            object-fit: cover;
+            border-radius: 12px;
+
+            @include g.mq() {
+                border-radius: 24px;
+            }
+        }
+    }
+
+    .text {
+        font-weight: bold;
+        line-height: 2;
+        margin-top: 40px;
+    }
+</style>

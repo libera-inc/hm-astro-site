@@ -1,0 +1,62 @@
+---
+export interface Props {
+    prev?: string;
+    next?: string;
+}
+
+const { prev, next } = Astro.props;
+---
+
+<div class='pagination'>
+    {prev ? <a href={prev}>Prev</a> : <span>Prev</span>}
+    {next ? <a href={next}>Next</a> : <span>Next</span>}
+</div>
+
+<style lang='scss'>
+    @use "/src/styles/global.scss" as g;
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+
+        a,
+        span {
+            display: inline-block;
+            width: 100px;
+            padding: 8px 16px;
+            font-size: 16px;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 12px;
+        }
+
+        a {
+            background-color: var(--color-link);
+            color: var(--color-white);
+            transition: 0.3s;
+
+            &:focus-visible {
+                transform: scale(1.05);
+                background-color: var(--color-link-hover);
+                outline: none;
+                box-shadow:
+                    0 0 0 1px var(--color-outline) inset,
+                    0 0 0 4px var(--color-outline-inset);
+            }
+
+            @media (hover: hover) {
+                &:hover {
+                    transform: scale(1.05);
+                    background-color: var(--color-link-hover);
+                }
+            }
+        }
+
+        span {
+            background-color: var(--color-grey-dark);
+            color: var(--color-grey-extra-dark);
+            cursor: not-allowed;
+        }
+    }
+</style>

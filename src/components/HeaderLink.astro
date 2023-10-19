@@ -1,0 +1,59 @@
+---
+export interface Props {
+    href: string;
+    emoji: string;
+    active?: boolean;
+}
+
+const { href, emoji, active } = Astro.props;
+
+const { pathname } = Astro.url;
+const isActive = href === pathname.replace(/\/$/, "");
+---
+
+<a href={href} class:list={["link", { active: isActive || active }]}>
+    <span class='u-emoji'>{emoji}</span>
+    <slot />
+</a>
+
+<style lang='scss'>
+    @use "/src/styles/global.scss" as g;
+
+    .link {
+        letter-spacing: 0.1em;
+        padding: 8px 10px;
+        border-radius: 8px;
+        font-weight: bold;
+        text-transform: uppercase;
+        transition: 0.3s;
+        font-size: 14px;
+
+        @include g.mq() {
+            font-size: 18px;
+        }
+
+        &:focus-visible {
+            background-color: var(--color-black-hover);
+            outline: none;
+        }
+
+        @media (hover: hover) {
+            &:hover {
+                background-color: var(--color-black-hover);
+            }
+        }
+
+        span {
+            display: inline-block;
+            font-size: 18px;
+
+            @include g.mq() {
+                font-size: 20px;
+            }
+        }
+
+        &.active {
+            background-color: var(--color-black-hover);
+        }
+    }
+</style>

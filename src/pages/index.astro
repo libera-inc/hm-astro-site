@@ -1,0 +1,35 @@
+---
+import Layout from "@src/layouts/Layout.astro";
+import { Picture } from "astro:assets";
+import topImage from "@src/images/top/top.png";
+---
+
+<Layout>
+    <div class='img'>
+        <Picture src={topImage} formats={["avif", "webp"]} alt='...' loading='eager' />
+    </div>
+
+    <p class='text'>(ChatGPTが文章作成)宇宙の広大さの中で、私たちはほんの一瞬の存在である。この無限の時間と空間の中で、我々の生命は短く、そして非常に特異なものとして映る。しかし、この一瞬の存在が持つ力と価値は計り知れない。 人間は感情を持ち、愛を知り、喜びと悲しみを感じる。この複雑で繊細な感情の網の中で、我々は自己を見つけ、他者との関係を築き上げる。そして、その関係性の中で、人生の真の意味や目的を追い求める。 物理的な存在のみならず、私たちの思考や感情、夢や希望は、私たちを単なる生物以上のものとして定義する。これらは、私たちが過去と未来、そして現在という時間の流れの中でつながって生きる証である。 結局のところ、生きるとは何か、成功とは何かという答えは一つではない。しかし、私たち一人一人が持つ独自の答えを見つけ、それを実現する過程こそが、最も価値のある旅となる。</p>
+</Layout>
+
+<style lang='scss'>
+    @use "/src/styles/global.scss" as g;
+
+    .img {
+        img {
+            aspect-ratio: 2/1;
+            object-fit: cover;
+            border-radius: 12px;
+
+            @include g.mq() {
+                border-radius: 24px;
+            }
+        }
+    }
+
+    .text {
+        font-weight: bold;
+        line-height: 2;
+        margin-top: 40px;
+    }
+</style>

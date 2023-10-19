@@ -1,0 +1,30 @@
+---
+export interface Props {
+    emoji: string;
+}
+
+const { emoji } = Astro.props;
+---
+
+<h1 class='title'>
+    <span class='u-emoji'>{emoji}</span>
+    <slot />
+</h1>
+
+<style lang='scss'>
+    @use "/src/styles/global.scss" as g;
+
+    .title {
+        font-weight: bold;
+        font-size: 24px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+
+        @include g.mq() {
+            font-size: 32px;
+        }
+    }
+</style>

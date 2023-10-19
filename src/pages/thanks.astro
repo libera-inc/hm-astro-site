@@ -1,0 +1,26 @@
+---
+import Layout from "@src/layouts/Layout.astro";
+import Title from "@src/components/Title.astro";
+---
+
+<Layout title='THANKS' description='THANKSページです。' noindex>
+    <Title emoji='🎉'>thanks</Title>
+
+    <p class='text'>
+        <span>送信完了しました。</span>
+        <span>数日以内にいただいたメールアドレスにご連絡します。</span>
+        <span>今しばらくお待ちください。</span>
+    </p>
+</Layout>
+
+<style lang='scss'>
+    .text {
+        font-weight: bold;
+        line-height: 2;
+        margin-top: 40px;
+
+        span {
+            display: block;
+        }
+    }
+</style>

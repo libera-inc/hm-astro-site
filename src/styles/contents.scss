@@ -1,0 +1,181 @@
+@use "/src/styles/global.scss" as g;
+
+// ブログとニュースの投稿スタイル
+.contents {
+    line-height: 2.2;
+    letter-spacing: 0.02em;
+    color: var(--color-font-base-light);
+
+    > * {
+        margin: 24px 0;
+
+        &:first-child,
+        &:last-child {
+            margin: 0 !important;
+        }
+    }
+
+    h2:not([class]) {
+        color: var(--color-black);
+        line-height: 1.65;
+        font-weight: bold;
+        font-size: 20px;
+        margin: 40px 0px 24px;
+        border-bottom: 4px solid var(--color-black);
+        padding-bottom: 8px;
+
+        @include g.mq() {
+            font-size: 24px;
+        }
+    }
+
+    h3:not([class]) {
+        color: var(--color-black);
+        line-height: 1.65;
+        font-weight: bold;
+        font-size: 18px;
+        margin: 32px 0px 24px;
+        border-left: 4px solid var(--color-black);
+        padding-left: 10px;
+
+        @include g.mq() {
+            font-size: 20px;
+        }
+    }
+
+    strong:not([class]) {
+        font-weight: bold;
+    }
+
+    a:not([class]) {
+        color: var(--color-link);
+        font-weight: bold;
+        display: inline-block;
+        word-break: break-all;
+        text-decoration: underline;
+        padding: 0 4px;
+        transition: 0.3s;
+        outline: none;
+
+        &:focus-visible {
+            color: var(--color-white);
+            background-color: var(--color-link);
+            // text-decoration: none;
+        }
+
+        @media (hover: hover) {
+            &:hover {
+                color: var(--color-link-hover);
+                text-decoration: none;
+            }
+        }
+    }
+
+    ul:not([class]) {
+        padding-left: 4px;
+
+        li {
+            position: relative;
+            padding-left: 16px;
+
+            &:not(:first-child) {
+                margin-top: 4px;
+            }
+
+            &::before {
+                content: "";
+                width: 5px;
+                height: 5px;
+                border-radius: 50%;
+                background-color: var(--color-black);
+                position: absolute;
+                display: inline-block;
+                position: absolute;
+                left: 0;
+                top: 15px;
+
+                @include g.mq() {
+                    top: 18px;
+                }
+            }
+        }
+    }
+
+    ol:not([class]) {
+        counter-reset: number;
+        padding-left: 4px;
+
+        li {
+            display: flex;
+            align-items: baseline;
+
+            &:not(:first-child) {
+                margin-top: 4px;
+            }
+
+            &:before {
+                content: counter(number);
+                counter-increment: number;
+                color: var(--color-black);
+                flex-shrink: 0;
+                margin-right: 2px;
+                order: -2;
+                font-weight: bold;
+            }
+
+            &:after {
+                content: "";
+                display: inline-block;
+                width: 3px;
+                height: 3px;
+                border-radius: 50%;
+                background-color: var(--color-black);
+                flex-shrink: 0;
+                order: -1;
+                margin-right: 8px;
+            }
+        }
+    }
+
+    blockquote:not([class]) {
+        margin: 40px 0 32px;
+        padding: 20px 24px 16px;
+        background-color: var(--color-grey);
+        position: relative;
+        border-radius: 8px;
+        font-weight: bold;
+        color: var(--color-font-base-extra-light);
+
+        &:before {
+            content: "“";
+            position: absolute;
+            left: 2px;
+            top: 20px;
+            transform: translateY(-50%);
+            display: inline-block;
+            font-size: 80px;
+            opacity: 0.2;
+            line-height: 1;
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+        }
+    }
+
+    table:not([class]) {
+        width: 100%;
+
+        th,
+        td {
+            border: 1px solid var(--color-border);
+            padding: 8px 12px;
+            font-size: 14px;
+        }
+    }
+
+    img:not([class]) {
+        border-radius: 12px;
+
+        @include g.mq() {
+            border-radius: 24px;
+        }
+    }
+}

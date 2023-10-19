@@ -1,0 +1,108 @@
+---
+import HeaderLink from "@src/components/HeaderLink.astro";
+import Logo from "@src/components/Logo.astro";
+
+const { pathname } = Astro.url;
+const isHomePage = pathname === "/";
+---
+
+<header class='header'>
+    {
+        isHomePage ? (
+            <h1 class='logo'>
+                <Logo />
+            </h1>
+        ) : (
+            <p class='logo'>
+                <Logo />
+            </p>
+        )
+    }
+
+    <nav>
+        <ul class='list'>
+            <li class='item'>
+                <HeaderLink href='/' emoji='🏠'>home</HeaderLink>
+            </li>
+            <li class='item'>
+                <HeaderLink href='/about' emoji='🤘'>about</HeaderLink>
+            </li>
+            <li class='item'>
+                <HeaderLink href='/news/1' emoji='💡' active={!!pathname.match(/news/)}>news</HeaderLink>
+            </li>
+            <li class='item'>
+                <HeaderLink href='/blog/1' emoji='📚' active={!!pathname.match(/blog/)}>blog</HeaderLink>
+            </li>
+            <li class='item'>
+                <HeaderLink href='/contact' emoji='📮'>contact</HeaderLink>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<style lang='scss'>
+    @use "/src/styles/global.scss" as g;
+
+    .header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: var(--color-black);
+        color: var(--color-white);
+        padding: 12px 0;
+
+        @include g.mq() {
+            padding: 20px 0;
+        }
+
+        @include g.mq(lg) {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 16px;
+        }
+    }
+
+    .logo {
+        margin-left: -16px;
+
+        @include g.mq() {
+            margin-left: 0;
+        }
+    }
+
+    .list {
+        display: flex;
+        gap: 4px;
+        margin-top: 8px;
+        overflow-x: scroll;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        padding: 8px 0;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        &::before,
+        &::after {
+            content: "";
+            display: block;
+            width: 8px;
+            flex-shrink: 0;
+
+            @include g.mq() {
+                display: none;
+            }
+        }
+
+        @include g.mq() {
+            gap: 8px;
+            margin-top: 0;
+        }
+    }
+
+    .item {
+        flex-shrink: 0;
+    }
+</style>
