@@ -3,6 +3,7 @@ import "@src/styles/contents.scss";
 import { type CollectionEntry, getCollection } from "astro:content";
 import Layout from "@src/layouts/Layout.astro";
 import PostDate from "@src/components/PostDate.astro";
+import { Picture } from "astro:assets";
 
 export async function getStaticPaths() {
     const posts = await getCollection("blog");
@@ -18,7 +19,9 @@ const { Content } = await post.render();
 ---
 
 <Layout title={post.data.title} description={post.data.description}>
-    {post.data.thumbnail && <img width={720} height={360} src={post.data.thumbnail} alt='' class='thumbnail' />}
+    <div class='thumbnail'>
+        <Picture src={post.data.thumbnail} alt='' />
+    </div>
 
     <div class='date'>
         <PostDate pubDate={post.data.pubDate} updatedDate={post.data.updatedDate} />
@@ -36,6 +39,7 @@ const { Content } = await post.render();
 
     .thumbnail {
         border-radius: 12px;
+        overflow: hidden;
 
         @include g.mq() {
             border-radius: 24px;
