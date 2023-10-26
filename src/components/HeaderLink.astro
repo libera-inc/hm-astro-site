@@ -8,7 +8,7 @@ export interface Props {
 const { href, emoji, active } = Astro.props;
 
 const { pathname } = Astro.url;
-const isActive = href === pathname.replace(/\/$/, "");
+const isActive = pathname === "/" ? href === "/" : href === pathname.replace(/\/$/, "");
 ---
 
 <a href={href} class:list={["link", { active: isActive || active }]}>
