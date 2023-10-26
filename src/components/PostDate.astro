@@ -1,16 +1,16 @@
 ---
 export interface Props {
-    pubDate: Date;
-    updatedDate: Date | undefined;
+    pubDate: string;
+    updatedDate: string | undefined;
 }
 
 const { pubDate, updatedDate } = Astro.props;
 ---
 
 <div class='time'>
-    <time datetime={pubDate.toISOString()}>公開：{pubDate.toLocaleDateString("ja-JP")}</time>
+    <time datetime={pubDate}>公開：{pubDate}</time>
 
-    {updatedDate && <time datetime={updatedDate.toISOString()}>更新：{updatedDate.toLocaleDateString("ja-JP")}</time>}
+    {updatedDate && <time datetime={updatedDate}>更新：{updatedDate}</time>}
 </div>
 
 <style lang='scss'>
