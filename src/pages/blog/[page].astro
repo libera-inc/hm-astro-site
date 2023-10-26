@@ -13,6 +13,16 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
 }
 
 const { page } = Astro.props;
+
+type PostType = {
+    slug: string;
+    data: {
+        title: string;
+        pubDate: string;
+        updatedDate?: string;
+        thumbnail: ImageMetadata;
+    };
+};
 ---
 
 <Layout title='BLOG' description='BLOGページです。'>
@@ -20,7 +30,7 @@ const { page } = Astro.props;
 
     <div class='list'>
         {
-            page.data.map((post) => (
+            page.data.map((post: PostType) => (
                 <article class='article'>
                     <a href={`/blog/${post.slug}/`} class='thumbnail'>
                         <Picture src={post.data.thumbnail} alt='' />
